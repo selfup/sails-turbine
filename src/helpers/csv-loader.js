@@ -17,7 +17,7 @@ class CSVLoader {
     this.loadData()
     return _.map(this.csvData, row => {
       return _.zipObject(this.csvHeaders, row.split(","))  
-    })  
+    })
   }
 }
 

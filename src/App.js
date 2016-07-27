@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
-import { Button } from 'react-bootstrap';
-import SalesEngine from './sales-engine';
+import React, { Component } from 'react'
+import { Button }           from 'react-bootstrap'
+import Fire                 from './helpers/fire'
+import SalesEngine          from './sales-engine'
 
 class App extends Component {
   constructor() {
     super()
-
+    this.fire = new Fire().fire
     this.state = {
       itemsInput: "",
       merchantsInput: "",
@@ -34,31 +35,11 @@ class App extends Component {
   }
 
   itemsFire(that) {
-    let itemsInput = that.state.itemsInput
-    itemsInput.addEventListener('change', function(e) {
-      let file = itemsInput.files[0]
-      let reader = new FileReader()
-      reader.onload = function(e) {
-        let files = that.state.files 
-        files.push(reader.result)
-        that.setState({files: files})
-      }
-      reader.readAsText(file)
-    })
+    this.fire(this, this.state.itemsInput)
   }
 
   merchantsFire(that) {
-    let merchantsInput = that.state.merchantsInput
-    merchantsInput.addEventListener('change', function(e) {
-      let file = merchantsInput.files[0]
-      let reader = new FileReader()
-      reader.onload = function(e) {
-        let files = that.state.files 
-        files.push(reader.result)
-        that.setState({files: files})
-      }
-      reader.readAsText(file)
-    })
+    this.fire(this, this.state.merchantsInput)
   }
 
   render() {
