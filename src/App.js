@@ -68,9 +68,9 @@ class App extends Component {
         <div id="page-wrapper"/>
         <div className="container">
           <h1>Sails Turbine</h1>
-          <h3>Select the items csv file:</h3> 
+          <h3>Select the items.csv file:</h3> 
           <input type="file" id="items"/><br/>
-          <h3>Select the merchants csv file:</h3> 
+          <h3>Select the merchants.csv file:</h3> 
           <input type="file" id="merchants"/><br/>
           <Button
             bsStyle="success" 
