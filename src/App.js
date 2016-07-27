@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
-import SalesEngine from './sales-engine.js';
+import SalesEngine from './sales-engine';
 
 class App extends Component {
   constructor() {
@@ -8,21 +8,24 @@ class App extends Component {
 
     this.state = {
       itemsInput: "",
+      merchantsInput: "",
       files: [],
-      salesEngine: ""
+      salesEngine: {}
     }
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount() {
-    this.setState({itemsInput: document.getElementById('itemsInput')}, () => {
-      this.listen()
-      console.log(this.state.salesEngine)
+    this.setState({itemsInput: document.getElementById('items')}, () => {
+      this.setState({merchantsInput: document.getElementById('merchants')}, () => {
+        this.listen()
+      })
     })
   }
 
   listen() {
-    this.fire(this)
+    this.itemsFire(this)
+    this.merchantsFire(this)
   }
 
   handleSubmit() {
@@ -30,16 +33,29 @@ class App extends Component {
     this.setState({salesEngine: new SalesEngine(files)})
   }
 
-
-  fire(self) {
-    let itemsInput = self.state.itemsInput
+  itemsFire(that) {
+    let itemsInput = that.state.itemsInput
     itemsInput.addEventListener('change', function(e) {
       let file = itemsInput.files[0]
       let reader = new FileReader()
       reader.onload = function(e) {
-        let files = self.state.files 
+        let files = that.state.files 
         files.push(reader.result)
-        self.setState({files: files})
+        that.setState({files: files})
+      }
+      reader.readAsText(file)
+    })
+  }
+
+  merchantsFire(that) {
+    let merchantsInput = that.state.merchantsInput
+    merchantsInput.addEventListener('change', function(e) {
+      let file = merchantsInput.files[0]
+      let reader = new FileReader()
+      reader.onload = function(e) {
+        let files = that.state.files 
+        files.push(reader.result)
+        that.setState({files: files})
       }
       reader.readAsText(file)
     })
@@ -53,8 +69,9 @@ class App extends Component {
         <div className="container">
           <h1>Sails Turbine</h1>
           <h3>Select the items csv file:</h3> 
-          <input type="file" id="itemsInput"/>
-          <br/>
+          <input type="file" id="items"/><br/>
+          <h3>Select the merchants csv file:</h3> 
+          <input type="file" id="merchants"/><br/>
           <Button
             bsStyle="success" 
             bsSize="small"
