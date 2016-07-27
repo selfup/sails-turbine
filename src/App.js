@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button } from 'react-bootstrap';
 import SalesEngine from './sales-engine.js';
 
 class App extends Component {
@@ -6,15 +7,17 @@ class App extends Component {
     super()
 
     this.state = {
-      fileInput: "",
-      items: ""
+      itemsInput: "",
+      files: [],
+      salesEngine: ""
     }
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount() {
-    this.setState({fileInput: document.getElementById('fileInput')}, () => {
+    this.setState({itemsInput: document.getElementById('itemsInput')}, () => {
       this.listen()
-      console.log(this.state.items)
+      console.log(this.state.salesEngine)
     })
   }
 
@@ -22,13 +25,21 @@ class App extends Component {
     this.fire(this)
   }
 
+  handleSubmit() {
+    const files = this.state.files
+    this.setState({salesEngine: new SalesEngine(files)})
+  }
+
+
   fire(self) {
-    let fileInput = self.state.fileInput
-    fileInput.addEventListener('change', function(e) {
-      let file = fileInput.files[0]
+    let itemsInput = self.state.itemsInput
+    itemsInput.addEventListener('change', function(e) {
+      let file = itemsInput.files[0]
       let reader = new FileReader()
       reader.onload = function(e) {
-        self.setState({items: new SalesEngine({items: reader.result}).items.all})
+        let files = self.state.files 
+        files.push(reader.result)
+        self.setState({files: files})
       }
       reader.readAsText(file)
     })
@@ -37,11 +48,22 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-      <div id="root"></div>
-      <div id="page-wrapper"/>
-      <h1>Sails Turbine</h1>
-        Select the items csv file: 
-      <input type="file" id="fileInput"/>
+        <div id="root"></div>
+        <div id="page-wrapper"/>
+        <div className="container">
+          <h1>Sails Turbine</h1>
+          <h3>Select the items csv file:</h3> 
+          <input type="file" id="itemsInput"/>
+          <br/>
+          <Button
+            bsStyle="success" 
+            bsSize="small"
+            id="submitInputs"
+            onClick={this.handleSubmit}
+          >
+          Submit
+          </Button>
+        </div>
       </div>
     )
   }
