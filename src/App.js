@@ -8,8 +8,8 @@ class App extends Component {
     super()
     this.fire = new Fire().fire
     this.state = {
-      itemsInput: "",
-      merchantsInput: "",
+      items: "",
+      merchants: "",
       files: [],
       salesEngine: {}
     }
@@ -17,8 +17,9 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.setState({itemsInput: document.getElementById('items')}, () => {
-      this.setState({merchantsInput: document.getElementById('merchants')}, () => {
+    const d = document
+    this.setState({items: d.getElementById('items')}, () => {
+      this.setState({merchants: d.getElementById('merchants')}, () => {
         this.listen()
       })
     })
@@ -35,11 +36,11 @@ class App extends Component {
   }
 
   itemsFire(that) {
-    this.fire(this, this.state.itemsInput)
+    this.fire(this, this.state.items)
   }
 
   merchantsFire(that) {
-    this.fire(this, this.state.merchantsInput)
+    this.fire(this, this.state.merchants)
   }
 
   render() {
