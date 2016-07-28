@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Button }           from 'react-bootstrap'
 import Fire                 from './helpers/fire'
+import Items                from './Items'
 import SalesEngine          from './sales-engine'
 
 class App extends Component {
@@ -11,7 +12,10 @@ class App extends Component {
       items: "",
       merchants: "",
       files: [],
-      salesEngine: {}
+      salesEngine: {
+        items: { all: [] },
+        merchants: { all: [] }
+      }
     }
     this.handleSubmit = this.handleSubmit.bind(this)
   }
@@ -55,7 +59,8 @@ class App extends Component {
             onClick={this.handleSubmit}
           >
           Submit
-          </Button>
+          </Button><br/><br/>
+          <Items items={this.state.salesEngine.items.all}/>
         </div>
       </div>
     )
