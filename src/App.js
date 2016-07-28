@@ -17,26 +17,23 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const d = document
-    this.setState({items: d.getElementById('items')}, () => this.itemsFire())
-    this.setState({merchants: d.getElementById('merchants')}, () => this.merchantsFire())
+    this.setState({items: this.id('items')}, () => this.items())
+    this.setState({merchants: this.id('merchants')}, () => this.merchants())
   }
-
-  listen() {
-    this.itemsFire()
-    this.merchantsFire()
+  
+  id(node) {
+    return document.getElementById(node)
   }
 
   handleSubmit() {
-    const files = this.state.files
-    this.setState({salesEngine: new SalesEngine(files)})
+    this.setState({salesEngine: new SalesEngine(this.state.files)})
   }
 
-  itemsFire() {
+  items() {
     this.fire(this, this.state.items)
   }
 
-  merchantsFire() {
+  merchants() {
     this.fire(this, this.state.merchants)
   }
 
