@@ -19,7 +19,7 @@ class App extends Component {
   componentDidMount() {
     const d = document
     this.setState({items: d.getElementById('items')}, () => this.itemsFire())
-    this.setState({merchants: d.getElementById('merchants')}, ()=> this.merchantsFire())
+    this.setState({merchants: d.getElementById('merchants')}, () => this.merchantsFire())
   }
 
   listen() {
