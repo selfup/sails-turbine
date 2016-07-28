@@ -26,8 +26,8 @@ class App extends Component {
   }
 
   listen() {
-    this.itemsFire(this)
-    this.merchantsFire(this)
+    this.itemsFire()
+    this.merchantsFire()
   }
 
   handleSubmit() {
@@ -35,11 +35,11 @@ class App extends Component {
     this.setState({salesEngine: new SalesEngine(files)})
   }
 
-  itemsFire(that) {
+  itemsFire() {
     this.fire(this, this.state.items)
   }
 
-  merchantsFire(that) {
+  merchantsFire() {
     this.fire(this, this.state.merchants)
   }
 
