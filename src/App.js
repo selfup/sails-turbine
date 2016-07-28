@@ -1,28 +1,33 @@
-import React, { Component } from 'react';
-import { Button } from 'react-bootstrap';
-import SalesEngine from './sales-engine.js';
+import React, { Component } from 'react'
+import { Button }           from 'react-bootstrap'
+import Fire                 from './helpers/fire'
+import SalesEngine          from './sales-engine'
 
 class App extends Component {
   constructor() {
     super()
-
+    this.fire = new Fire().fire
     this.state = {
-      itemsInput: "",
+      items: "",
+      merchants: "",
       files: [],
-      salesEngine: ""
+      salesEngine: {}
     }
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount() {
-    this.setState({itemsInput: document.getElementById('itemsInput')}, () => {
-      this.listen()
-      console.log(this.state.salesEngine)
+    const d = document
+    this.setState({items: d.getElementById('items')}, () => {
+      this.setState({merchants: d.getElementById('merchants')}, () => {
+        this.listen()
+      })
     })
   }
 
   listen() {
-    this.fire(this)
+    this.itemsFire(this)
+    this.merchantsFire(this)
   }
 
   handleSubmit() {
@@ -30,19 +35,12 @@ class App extends Component {
     this.setState({salesEngine: new SalesEngine(files)})
   }
 
+  itemsFire(that) {
+    this.fire(this, this.state.items)
+  }
 
-  fire(self) {
-    let itemsInput = self.state.itemsInput
-    itemsInput.addEventListener('change', function(e) {
-      let file = itemsInput.files[0]
-      let reader = new FileReader()
-      reader.onload = function(e) {
-        let files = self.state.files 
-        files.push(reader.result)
-        self.setState({files: files})
-      }
-      reader.readAsText(file)
-    })
+  merchantsFire(that) {
+    this.fire(this, this.state.merchants)
   }
 
   render() {
@@ -52,9 +50,10 @@ class App extends Component {
         <div id="page-wrapper"/>
         <div className="container">
           <h1>Sails Turbine</h1>
-          <h3>Select the items csv file:</h3> 
-          <input type="file" id="itemsInput"/>
-          <br/>
+          <h3>Select the items.csv file:</h3> 
+          <input type="file" id="items"/><br/>
+          <h3>Select the merchants.csv file:</h3> 
+          <input type="file" id="merchants"/><br/>
           <Button
             bsStyle="success" 
             bsSize="small"
