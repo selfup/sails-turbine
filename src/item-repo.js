@@ -4,13 +4,12 @@ const _         = require('lodash')
 
 class ItemRepo {
   constructor(file) {
-    this.data = new CSVLoader(file).data
     this.all  = {}
-    this.loadRepo()
+    this.loadRepo(file)
   }
 
-  loadRepo() {
-    _.each(this.data, (row, index) => {
+  loadRepo(file) {
+    _.each(new CSVLoader(file).data, (row, index) => {
       this.all[index] = new Item(row)
     })
   }
