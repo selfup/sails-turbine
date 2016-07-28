@@ -1,7 +1,7 @@
 class Fire {
     fire(that, csvFile) {
-      csvFile.addEventListener('change', function(e) {
-        let file = csvFile.files[0]
+      csvFile.addEventListener('change', () => {
+        const file = csvFile.files[0]
         let reader = new FileReader()
         reader.onload = function(e) {
           let files = that.state.files 
