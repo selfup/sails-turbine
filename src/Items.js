@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './Items.css'
+import './css/Items.css'
 
 class Items extends Component {
   itemsLoader() {

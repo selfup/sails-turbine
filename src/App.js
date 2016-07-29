@@ -2,12 +2,12 @@ import React, { Component } from 'react'
 import { Button }           from 'react-bootstrap'
 import Fire                 from './helpers/fire'
 import Items                from './Items'
-import SalesEngine          from './sales-engine'
+import SalesEngine          from './sales-engine/sales-engine'
 
 class App extends Component {
   constructor() {
     super()
-    this.fire = new Fire().fire
+    this.fire  = new Fire().fire
     this.state = {
       items: "",
       merchants: "",
