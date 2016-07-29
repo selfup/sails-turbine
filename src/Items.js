@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
+import './Items.css'
 
 class Items extends Component {
   itemsLoader() {
     return this.props.items.map((item) => {
       return (
-        <div className="container Ideas-container" key={item.id}>
-          <p>Id: {item.id}</p>
+        <div className="container Items-container" key={item.id}>
+          <br/>
+          <p><em>Id: {item.id}</em></p>
           <h3>Name: {item.name}</h3>
           <p>Description: {item.description}</p>
         </div>

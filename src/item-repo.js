@@ -1,5 +1,5 @@
-const CSVLoader = require('./helpers/csv-loader.js')
-const Item      = require('./item.js')
+const CSVLoader = require('./helpers/csv-loader')
+const Item      = require('./item')
 const _         = require('lodash')
 
 class ItemRepo {
