@@ -10,4 +10,4 @@ Load the `merchants.csv` file from the data folder.
 
 Click Submit.
 
-Go to the React Dev Tools, and check out the `SalesEngine` state key!
+Wait a few seconds (A LOT of records are about to render to the screen!) and voila!
