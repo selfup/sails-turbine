@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Button }           from 'react-bootstrap'
 import Fire                 from './helpers/fire'
 import Items                from './Items'
+import Merchants            from './Merchants'
 import SalesEngine          from './sales-engine/sales-engine'
 
 class App extends Component {
@@ -60,9 +61,18 @@ class App extends Component {
           >
           Submit
           </Button><br/><br/>
-          <Items items={this.state.salesEngine.items.all}/>
+          <div className="row">
+            <div className="col-md-6">
+              <h1 className="App-items">Items: </h1>
+              <Items items={this.state.salesEngine.items.all}/>
+            </div>
+            <div className="col-md-6">
+              <h1 className="App-merchants">Merchants: </h1>
+              <Merchants merchants={this.state.salesEngine.merchants.all}/>
+            </div>
+          </div>
         </div>
-      </div>
+        </div>
     )
   }
 }
