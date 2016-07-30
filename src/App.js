@@ -10,6 +10,8 @@ class App extends Component {
     super()
     this.fire  = new Fire().fire
     this.state = {
+      beg: 0,
+      end: 3,
       items: "",
       merchants: "",
       files: [],
@@ -64,11 +66,22 @@ class App extends Component {
           <div className="row">
             <div className="col-md-6">
               <h1 className="App-items">Items: </h1>
-              <Items items={this.state.salesEngine.items.all}/>
+              <Items 
+                items={
+                  this.state.salesEngine
+                    .items.all
+                    .slice(this.state.beg, this.state.end)
+                }
+              />
             </div>
             <div className="col-md-6">
               <h1 className="App-merchants">Merchants: </h1>
-              <Merchants merchants={this.state.salesEngine.merchants.all}/>
+              <Merchants merchants={
+                  this.state.salesEngine
+                    .merchants.all
+                    .slice(this.state.beg, this.state.end)
+                }
+              />
             </div>
           </div>
         </div>
