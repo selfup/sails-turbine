@@ -8,6 +8,6 @@ Load the `items.csv` file from the data folder.
 
 Load the `merchants.csv` file from the data folder.
 
-Click Submit.
+Click Submit and voila!
 
-Wait a few seconds (A LOT of records are about to render to the screen!) and voila!
+Once the data is loaded, `page up` and `page down` buttons will sift through the data.
