@@ -17,6 +17,7 @@ class Merchants extends Component {
   render() {
     return(
       <div>
+        <h1>Merchants: </h1>
         {this.merchantsLoader()}
       </div>
     )

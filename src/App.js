@@ -20,7 +20,9 @@ class App extends Component {
         merchants: { all: [] }
       }
     }
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handlePageUp   = this.handlePageUp.bind(this)
+    this.handlePageDown = this.handlePageDown.bind(this)
+    this.handleSubmit   = this.handleSubmit.bind(this)
   }
 
   componentDidMount() {
@@ -44,6 +46,18 @@ class App extends Component {
     this.fire(this, this.state.merchants)
   }
 
+  handlePageUp() {
+    const newBeg = this.state.beg + 3
+    const newEnd = this.state.end + 3
+    this.setState({beg: newBeg, end: newEnd})
+  }
+
+  handlePageDown() {
+    const newBeg = this.state.beg - 3
+    const newEnd = this.state.end - 3
+    this.setState({beg: newBeg, end: newEnd})
+  }
+
   render() {
     return (
       <div className="App">
@@ -62,10 +76,25 @@ class App extends Component {
             onClick={this.handleSubmit}
           >
           Submit
+          </Button>
+                    <Button
+            bsStyle="danger" 
+            bsSize="small"
+            id="submitInputs"
+            onClick={this.handlePageUp}
+          >
+          Page Up
+          </Button>
+          <Button
+            bsStyle="danger" 
+            bsSize="small"
+            id="submitInputs"
+            onClick={this.handlePageDown}
+          >
+          Page Down
           </Button><br/><br/>
           <div className="row">
             <div className="col-md-6">
-              <h1 className="App-items">Items: </h1>
               <Items 
                 items={
                   this.state.salesEngine
@@ -75,7 +104,6 @@ class App extends Component {
               />
             </div>
             <div className="col-md-6">
-              <h1 className="App-merchants">Merchants: </h1>
               <Merchants merchants={
                   this.state.salesEngine
                     .merchants.all
