@@ -39,23 +39,19 @@ class App extends Component {
   }
 
   items() {
-    this.fire(this, this.state.items)
+    this.fire.call(this, this.state.items)
   }
 
   merchants() {
-    this.fire(this, this.state.merchants)
+    this.fire.call(this, this.state.merchants)
   }
 
   handlePageUp() {
-    const newBeg = this.state.beg + 3
-    const newEnd = this.state.end + 3
-    this.setState({beg: newBeg, end: newEnd})
+    this.setState({beg: this.state.beg + 3, end: this.state.end + 3})
   }
 
   handlePageDown() {
-    const newBeg = this.state.beg - 3
-    const newEnd = this.state.end - 3
-    this.setState({beg: newBeg, end: newEnd})
+    this.setState({beg: this.state.beg - 3, end: this.state.end - 3})
   }
 
   render() {
@@ -77,7 +73,7 @@ class App extends Component {
           >
           Submit
           </Button>
-                    <Button
+          <Button
             bsStyle="danger" 
             bsSize="small"
             id="submitInputs"
@@ -97,16 +93,14 @@ class App extends Component {
             <div className="col-md-6">
               <Items 
                 items={
-                  this.state.salesEngine
-                    .items.all
+                  this.state.salesEngine.items.all
                     .slice(this.state.beg, this.state.end)
                 }
               />
             </div>
             <div className="col-md-6">
               <Merchants merchants={
-                  this.state.salesEngine
-                    .merchants.all
+                  this.state.salesEngine.merchants.all
                     .slice(this.state.beg, this.state.end)
                 }
               />
